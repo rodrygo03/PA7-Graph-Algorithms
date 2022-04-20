@@ -1,4 +1,32 @@
 # Graph Algorithms
+In this assignment, the Graph data structure is provided. We also provide many helper functions. The only four functions you have to write are:
+
+- Topological Sort
+  - `computeIndegree`
+  - `topologicalSort`
+- Dijkstra's Algorithm
+  - `relax`
+  - `dijkstrasAlgorithm`
+
+Pseudocode for these functions is provided below. (Search for `PSEUDOCODE` using your browser!)
+
+This is intended to be a fairly easy Programming Assignment to end the semester, but there are a few new concepts which we will describe below.
+
+### `std::unordered_set`
+This is similar to a `std::unordered_map`, but where a map maintains key-value pairs, the set maintains only keys. Its role is to add and remove element quickly and to quickly determine whether an element is present in the set.
+
+It is used in Dijkstra's algorithm to manage the set of visited nodes `s`.
+
+### `std::optional`
+This type is a container that can either have an object or will not have anything. We fill the optionals with nothing (`std::nullopt`) and then can replace that data with `value_type<T>` as part of the `relax` function.
+
+Useful functions for optionals are:
+```cpp
+std::optional o; // optional
+// ... do domething with o
+if (o.has_value()) // returns true if o has a value
+o.value() // fetch the value from o, fails if no value
+```
 
 ## Getting started
 
@@ -588,13 +616,13 @@ std::list<value_type<T>> topologicalSort(const WeightedGraph<T>& graph)
 
 **Pseudocode**:
 ```py
-q = Queue()
-l = List()
+q = [] # Queue
+l = [] # List
 
-q.extend([v in graph if indegree[v] == 0])
+q.extend([v for v in graph if indegree[v] == 0])
 
-while not q.isEmpty():
-    v = q.pop()
+while len(q) > 0:
+    v = q.pop(0) # remove first
     l.append(v)
 
     for adj_v in v.adj_list:
@@ -652,14 +680,140 @@ std::unordered_map<value_type<T>, std::optional<value_type<T>>>& predecessors)
 - *n* is the number of vertices
 - *m* is the average number of edges in each adjacency list
 
+----
 
-#### Further Reading
-- []()
+```cpp
+template <typename T>
+class DijkstraComparator
+```
+
+**Description**: Compares two vertices by their distance from the source vertex.
+
+----
+
+```cpp
+template <typename T>
+void updateHeap(std::priority_queue<value_type<T>, std::vector<value_type<T>>, DijkstraComparator<T>>& q,
+std::unordered_map<value_type<T>, weight_type<T>>& distances)
+```
+
+**Description**: Reorders the heap based on changes to the distances after relaxation.
+
+**Parameters**:
+- `q` the priority queue to reorganize
+- `distances` the mapping of vertices to their distances from the source
+
+**Returns**: *None*
+
+**Throws**: *None*
+
+**Time Complexity**: *O(n)* &ndash; Linear Time
+- *n* is the queue size
+
+----
+
+```cpp
+template <typename T>
+bool relax(value_type<T> u, value_type<T> v, weight_type<T> w,
+std::unordered_map<value_type<T>, weight_type<T>>& distances,
+std::unordered_map<value_type<T>, std::optional<value_type<T>>>& predecessors)
+```
+
+**Description**: Relaxes the edge from `u` to `v` given `w` and the distances. If the relaxation occurs, the `distances` and `predecessors` are updated.
+
+**Parameters**:
+- `u` the node at the start of the edge
+- `v` the node at the end of the edge
+- `w` the weight of the edge from `u` to `v`
+- `distances` the mapping of vertices to their distances from the source
+- `predecessors` the mapping of vertices to their predecessors along the shortest path from the source
+
+**Returns**:
+- `true` the edge was relaxed
+- `false` otherwise
+
+**Throws**: *None*
+
+**Time Complexity**: *O(1)* &ndash; Constant Time
+
+**Pseudocode**:
+```py
+if distance[v] > distance[u] + w:
+    distance[v] = distance[u] + w
+    predecessor[v] = u
+    return True
+
+return False
+```
+
+#### Dijkstra's Algorithm
+
+```cpp
+template <typename T>
+std::list<value_type<T>> dijkstrasAlgorithm(const WeightedGraph<T>& graph, vertex_type<T> initial_node, vertex_type<T> destination_node)
+```
+
+**Description**: Performs [Dijkstra's Algorithm](https://canvas.tamu.edu/courses/136654/files/35930572/preview) (Slide 16) on `graph` starting at `initial_node` and returns a list with every node visited along the path from `initial_node` to `destination_node`.
+
+**Parameters**:
+- `graph` graph to find a path through
+- `initial_node` the starting node in the graph
+- `destination_node` the ending node in the graph
+
+**Returns**: A list of all of the vertices along the shortest path from `initial_node` to `destination_node` or an empty list if no path exists.
+
+**Throws**:
+- `std::out_of_range` if either `initial_node` or `destination_node` are not in `graph`.
+
+**Time Complexity**: *O(nm log(nm))* &ndash; Polynomial Time
+- *n* is the number of vertices
+- *m* is the average number of edges in each adjacency list
+
+**Pseudocode**:
+```py
+initializeSingleSource(graph, initial_node)
+s = [] # Set
+q = [] # Priority Queue
+q.extend([v for v in graph])
+
+while len(q) > 0:
+    u = min(q)
+    q.remove(u)
+    if u not in s:
+        s.append(u)
+    for pair in u.adj_list:
+        v = pair.first
+        w = pair.second
+        r = relax(u, v, w)
+        if r:
+            updateHeap(q)
+
+if predecessor[destination_node] is None:
+    return []
+
+l = [] # List
+
+node = destination_node
+while predecessor[node] is not None:
+    l.append(node)
+
+l.append(initial_node)
+return l
+```
+
+### Further Reading
+#### Topological Sort
+- [Topological sorting - Wikipedia](https://en.wikipedia.org/wiki/Topological_sorting)
+- [Topological sorting - GeeksforGeeks](https://www.geeksforgeeks.org/topological-sorting/)
+
+#### Dijkstra's Algorithm
+- [Dr. Leyk's Slides](https://canvas.tamu.edu/courses/136654/files/35930572/preview)
+- [Dijkstra's algorithm - Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+- [Dijkstra's algorithm - GeeksforGeeks](https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)
 
 
 ### Application of Graphs & Graph Algorithms
-
-
+Graphs are not commonly used directly by programmers to solve problems but properties of graphs are often used. You will learn much more about graphs in CSCE 411 - Design and Analysis of Algorithms.
 
 ## Run Tests
 
@@ -703,6 +857,6 @@ The first command builds the tests, the next enters the folder where the tests w
 ## Turn In
 
 Submit the following file **and no other files** to Gradescope:
-- [ ] [`UnorderedMap.h`](src/UnorderedMap.h)
-- [ ] [`primes.h`](src/primes.h)
-- [ ] [`primes.cpp`](src/primes.cpp)
+- [ ] [`dijkstras-helpers.h`](src/dijkstras-helpers.h)
+- [ ] [`top-sort-helpers.h`](src/top-sort-helpers.h)
+- [ ] [`graph-algorithms.h`](src/graph-algorithms.h)
