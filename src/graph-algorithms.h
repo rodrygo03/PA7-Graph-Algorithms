@@ -12,6 +12,9 @@
 // #define ARROW_SEPARATOR " -> "
 
 template <typename T>
+using value_type = typename WeightedGraph<T>::value_type;
+
+template <typename T>
 using vertex_type = typename WeightedGraph<T>::vertex_type;
 template <typename T>
 using weight_type = typename WeightedGraph<T>::weight_type;
@@ -70,23 +73,39 @@ std::ostream& operator<<(std::ostream& o, const WeightedGraph<T>& graph) {
 }
 
 template <typename T>
-std::istream& operator>>(std::istream& i, WeightedGraph<T>& graph) {
-    using value_type = typename WeightedGraph<T>::value_type;
+std::istream& readEdge(std::istream& i, value_type<T>& vertex, weight_type<T>& weight) {
+    std::string s_vertex, s_weight;
+    std::getline(i, s_vertex, '(');
+    std::getline(i, s_weight, ')');
+    std::istringstream stream(s_vertex + " " + s_weight);
+    stream >> vertex >> weight;
+    if (stream.fail()) {
+        i.setf(stream.flags());
+    }
+    return i;
+}
 
+template <typename T>
+std::istream& operator>>(std::istream& i, WeightedGraph<T>& graph) {
     std::string line;
     while (std::getline(i, line)) {
         if (line.empty()) continue;
         std::istringstream line_stream(line);
-        value_type vertex;
-        line_stream >> vertex;
-        if (line_stream.fail()) {
-            i.setf(line_stream.flags());
+        value_type<T> vertex;
+        std::string s_vertex;
+        std::getline(line_stream, s_vertex, ':');
+        std::istringstream stream_vertex(s_vertex);
+        stream_vertex >> vertex;
+        if (stream_vertex.fail()) {
+            i.setf(stream_vertex.flags());
             break;
         }
         graph.push_vertex(vertex);
-        value_type edge_end;
+        std::string separator;
+        value_type<T> edge_end;
         weight_type<T> edge_weight;
-        while (line_stream >> edge_end >> edge_weight) {
+        while (readEdge<T>(line_stream, edge_end, edge_weight)) {
+            line_stream >> separator;
             graph.push_edge(vertex, edge_end, edge_weight);
         }
     }
