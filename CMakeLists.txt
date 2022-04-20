@@ -4,11 +4,11 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 SET(CMAKE_CXX_STANDARD 17)
 
 # Name of the project
-PROJECT(UnorderedMap)
+PROJECT(GraphAlgorithms)
 
 # Get the list of all files.
 FILE(GLOB_RECURSE SOURCES "src/*.cpp")
-FILE(GLOB_RECURSE HEADERS "src/*.h" "src/*.tcc")
+FILE(GLOB_RECURSE HEADERS "src/*.h" "src/*.hpp" "src/*.tcc")
 
 # Set the executable.
 ADD_EXECUTABLE(${CMAKE_PROJECT_NAME} ${SOURCES} ${HEADERS})
