@@ -13,6 +13,8 @@
 "6: 5(5)\n" \
 "7: 6(6)"
 
+#define GRAPH_TYPE int
+
 template <typename T>
 void getGraph(WeightedGraph<T>& graph, int argc, char* argv[]) {
     if (argc < 2) {
@@ -22,11 +24,35 @@ void getGraph(WeightedGraph<T>& graph, int argc, char* argv[]) {
     }
 }
 
+template <typename T>
+std::ostream& printVertexList(std::ostream& o, std::list<T> list, std::string label) {
+    o << "Start " << label << ": ";
+    for (const auto& e : list) {
+        o << e;
+        if (&e != &list.back()) {
+            o << ARROW_SEPARATOR;
+        }
+    }
+    return o << " :End " << label;
+}
+
 int main(int argc, char* argv[]) {
-    WeightedGraph<int> graph; // most input files
+    WeightedGraph<GRAPH_TYPE> graph; // most input files
     // WeightedGraph<std::string> graph; // inputCourses.dat
 
     getGraph(graph, argc, argv);
 
     std::cout << graph << std::endl;
+
+    typename WeightedGraph<GRAPH_TYPE>::value_type start, end;
+    std::cout << "Input Start Vertex Label for Dijkstra's: ";
+    std::cin >> start;
+    std::cout << "Input End Vertex Label for Dijkstra's: ";
+    std::cin >> end;
+
+    std::list<typename WeightedGraph<GRAPH_TYPE>::value_type> shortest_path = dijkstrasAlgorithm(graph, start, end);
+    printVertexList(std::cout, shortest_path, "Dijkstra's") << std::endl;
+
+    std::list<typename WeightedGraph<GRAPH_TYPE>::value_type> topological_sort = topologicalSort(graph);
+    printVertexList(std::cout, topological_sort, "Topological Sort") << std::endl;
 }
