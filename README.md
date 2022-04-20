@@ -23,6 +23,7 @@ The assignment provides you with a working `WeightedGraph` data structure, which
 
 ### Understand Weighted Graph
 #### Types
+
 | Type | Alias | Description |
 | ---- | ----- | ----------- |
 | `value_type` | `T` | The values stored in the vertices. Commonly used in the functions you'll write. |
@@ -39,11 +40,13 @@ The assignment provides you with a working `WeightedGraph` data structure, which
 
 These types were redefined in the [`graph-types.h`](src/graph-types.h) header. To use them from the header, write the type's name and supply a template argument. For example, `value_type<int>` or `weight_type<T>`.
 
-----
+#### Methods
 
 ```cpp
 bool empty() const
 ```
+
+**Description**: Determine whether the vertex set is empty.
 
 **Parameters**: *None*
 
@@ -60,6 +63,8 @@ bool empty() const
 ```cpp
 bool empty(const vertex_type& vertex) const
 ```
+
+**Description**: Determine whether the adjacency list associated with `vertex` is empty.
 
 **Parameters**:
 - `vertex` a vertex in the graph to test
@@ -80,6 +85,8 @@ bool empty(const vertex_type& vertex) const
 size_type size() const
 ```
 
+**Description**: Get the size of the vertex set.
+
 **Parameters**: *None*
 
 **Returns**: the number of vertices in the graph
@@ -93,6 +100,8 @@ size_type size() const
 ```cpp
 size_type size(const vertex_type& vertex) const
 ```
+
+**Description**: Get the size of the adjacency list associated with `vertex`.
 
 **Parameters**:
 - `vertex` a vertex in the graph to test
@@ -111,6 +120,8 @@ size_type size(const vertex_type& vertex) const
 const adjacency_list& at(const vertex_type& vertex) const
 ```
 
+**Description**: Get constant access to the adjacency list of `vertex`.
+
 **Parameters**:
 - `vertex` a vertex in the graph to access
 
@@ -127,6 +138,8 @@ const adjacency_list& at(const vertex_type& vertex) const
 ```cpp
 std::pair<iterator, bool> push_vertex(const vertex_type& vertex)
 ```
+
+**Description**: Adds `vertex` to the vertex set if it is not already there.
 
 **Parameters**:
 - `vertex` a vertex to add to the graph
@@ -147,6 +160,8 @@ std::pair<iterator, bool> push_vertex(const vertex_type& vertex)
 size_type pop_vertex(vertex_type& vertex)
 ```
 
+**Description**: Removes `vertex` from the vertex set if it exists and from the adjacency lists of all other vertices in the set if it exists in their lists.
+
 **Parameters**:
 - `vertex` a vertex to remove from the graph
 
@@ -163,6 +178,8 @@ size_type pop_vertex(vertex_type& vertex)
 ```cpp
 std::pair<edge_iterator, bool> push_edge(const vertex_type& source, const vertex_type& destination, const weight_type& weight)
 ```
+
+**Description**: Adds a given edge to the graph if no such edge already exists between `source` and `destination`.
 
 **Parameters**:
 - `source` a vertex in the graph at which the edge will begin
@@ -187,6 +204,8 @@ std::pair<edge_iterator, bool> push_edge(const vertex_type& source, const vertex
 size_type pop_edge(const vertex_type& source, const vertex_type& destination)
 ```
 
+**Description**: Removes the given edge from the graph it exists.
+
 **Parameters**:
 - `source` a vertex in the graph at which the edge will begin
 - `destination` a vertex at which the edge will end (need not exist in the graph)
@@ -208,6 +227,8 @@ size_type pop_edge(const vertex_type& source, const vertex_type& destination)
 iterator begin()
 ```
 
+**Description**: Gets a `iterator` to the beginning of the vertex set.
+
 **Parameters**: *None*
 
 **Returns**: `iterator` to the beginning vertex in the graph. This could be any given vertex within the graph, because `unordered_map` can order the vertices however it likes.
@@ -221,6 +242,8 @@ iterator begin()
 ```cpp
 const_iterator begin() const
 ```
+
+**Description**: Gets a `const_iterator` to the beginning of the vertex set.
 
 **Parameters**: *None*
 
@@ -236,6 +259,8 @@ const_iterator begin() const
 const_iterator cbegin() const
 ```
 
+**Description**: Gets a `const_iterator` to the beginning of the vertex set.
+
 **Parameters**: *None*
 
 **Returns**: `const_iterator` to the beginning vertex in the graph. This could be any given vertex within the graph, because `unordered_map` can order the vertices however it likes.
@@ -249,6 +274,8 @@ const_iterator cbegin() const
 ```cpp
 iterator end()
 ```
+
+**Description**: Gets an `iterator` to the end of the vertex set.
 
 **Parameters**: *None*
 
@@ -264,6 +291,8 @@ iterator end()
 const_iterator end() const
 ```
 
+**Description**: Gets a `const_iterator` to the end of the vertex set.
+
 **Parameters**: *None*
 
 **Returns**: `const_iterator` past the last vertex in the graph. This is the same `end` iterator we've seen for `unordered_map`.
@@ -278,6 +307,8 @@ const_iterator end() const
 const_iterator cend() const
 ```
 
+**Description**: Gets a `const_iterator` to the end of the vertex set.
+
 **Parameters**: *None*
 
 **Returns**: `const_iterator` past the last vertex in the graph. This is the same `cend` iterator we've seen for `unordered_map`.
@@ -291,6 +322,8 @@ const_iterator cend() const
 ```cpp
 edge_iterator begin(const vertex_type& vertex)
 ```
+
+**Description**: Gets an `edge_iterator` to the beginning of `vertex`'s adjacency list.
 
 **Parameters**:
 - `vertex` a vertex in the graph to examine
@@ -309,6 +342,8 @@ edge_iterator begin(const vertex_type& vertex)
 const_edge_iterator begin(const vertex_type& vertex) const
 ```
 
+**Description**: Gets a `const_edge_iterator` to the beginning of `vertex`'s adjacency list.
+
 **Parameters**:
 - `vertex` a vertex in the graph to examine
 
@@ -325,6 +360,8 @@ const_edge_iterator begin(const vertex_type& vertex) const
 ```cpp
 const_edge_iterator cbegin(const vertex_type& vertex) const
 ```
+
+**Description**: Gets a `const_edge_iterator` to the beginning of `vertex`'s adjacency list.
 
 **Parameters**:
 - `vertex` a vertex in the graph to examine
@@ -343,6 +380,8 @@ const_edge_iterator cbegin(const vertex_type& vertex) const
 edge_iterator end(const vertex_type& vertex)
 ```
 
+**Description**: Gets an `edge_iterator` to the end of `vertex`'s adjacency list.
+
 **Parameters**:
 - `vertex` a vertex in the graph to examine
 
@@ -360,6 +399,8 @@ edge_iterator end(const vertex_type& vertex)
 const_edge_iterator end(const vertex_type& vertex) const
 ```
 
+**Description**: Gets a `const_edge_iterator` to the end of `vertex`'s adjacency list.
+
 **Parameters**:
 - `vertex` a vertex in the graph to examine
 
@@ -376,6 +417,8 @@ const_edge_iterator end(const vertex_type& vertex) const
 ```cpp
 const_edge_iterator cend(const vertex_type& vertex) const
 ```
+
+**Description**: Gets a `const_edge_iterator` to the end of `vertex`'s adjacency list.
 
 **Parameters**:
 - `vertex` a vertex in the graph to examine
@@ -426,11 +469,189 @@ void clear(const vertex_type& vertex)
 - *n* is the number of vertices
 - *m* is the average number of edges in each adjacency list
 
+----
+
+```cpp
+template <typename T>
+std::ostream &operator<<(std::ostream &o, const WeightedGraph<T> &graph)
+```
+
+**Description**: Prints `graph` to `o`.
+
+**Parameters**:
+- `o` stream to receive the graph
+- `graph` the graph to print
+
+**Returns**: `o` to be used for stream chaining: `std::cout << graph << std::endl;`
+
+**Throws**: *None*
+
+**Time Complexity**: *O(nm)* &ndash; Linear Time
+- *n* is the number of vertices
+- *m* is the average number of edges in each adjacency list
+
+----
+
+```cpp
+template <typename T>
+std::istream &readEdge(std::istream &i, value_type<T> &vertex, weight_type<T> &weight)
+```
+
+**Description**: Reads `vertex` and `weight` from `i`.
+
+**Parameters**:
+- `i` stream to read the edge from
+- `vertex` the vertex to save
+- `weight` the weight to save
+
+**Returns**: `i` to be used for stream chaining.
+
+**Throws**: *None*
+
+**Time Complexity**: *O(1)* &ndash; Constant Time
+
+----
+
+```cpp
+template <typename T>
+std::istream &operator>>(std::istream &i, WeightedGraph<T> &graph)
+```
+
+**Description**: Reads `graph` from `i`.
+
+**Parameters**:
+- `i` stream to read the graph from
+- `graph` the graph to save
+
+**Returns**: `i` to be used for stream chaining.
+
+**Throws**: *None*
+
+**Time Complexity**: *O(nm)* &ndash; Linear Time
+- *n* is the number of vertices
+- *m* is the average number of edges in each adjacency list
 
 ### Implement Topological Sort
 
+#### Helpers
+
+```cpp
+template <typename T>
+void computeIndegrees(const WeightedGraph<T>& graph, std::unordered_map<value_type<T>, int>& indegrees)
+```
+
+**Description**: Associates the `indegrees` for each vertex in the `graph` with the values for the indegrees.
+
+**Parameters**:
+- `graph` graph to compute from
+- `indegrees` the mapping of a vertex to its indegree 
+
+**Returns**: *None*
+
+**Throws**:
+- Possibly `std::out_of_range` if the `graph` is malformed
+
+**Time Complexity**: *O(nm)* &ndash; Linear Time
+- *n* is the number of vertices
+- *m* is the average number of edges in each adjacency list
+
+**Pseudocode**:
+```py
+for vertex in graph:
+    indegree[vertex] = 0
+
+for adj_list in graph:
+    for vertex in adj_list:
+        indegree[vertex] += 1
+```
+
+#### Topological Sort
+
+```cpp
+template <typename T>
+std::list<value_type<T>> topologicalSort(const WeightedGraph<T>& graph)
+```
+
+**Description**: Creates a list of vertices in a valid, topological order if one exists. If not such ordering exists (perhaps because of a cycle), then it returns an empty list.
+
+**Parameters**:
+- `graph` graph to compute a topological ordering
+
+**Returns**: List of vertices in a valid topological ordering
+
+**Throws**:
+- Possibly `std::out_of_range` if the `graph` is malformed
+
+**Time Complexity**: *O(nm)* &ndash; Linear Time
+- *n* is the number of vertices
+- *m* is the average number of edges in each adjacency list
+
+**Pseudocode**:
+```py
+q = Queue()
+l = List()
+
+q.extend([v in graph if indegree[v] == 0])
+
+while not q.isEmpty():
+    v = q.pop()
+    l.append(v)
+
+    for adj_v in v.adj_list:
+        indegree[adj_v] -= 1
+        if indegree[adj_v] == 0:
+            q.push(adj_v)
+
+if len(l) != len(graph):
+    l.clear()
+
+return l
+```
 
 ### Implement Dijkstra's Algorithm
+
+#### Helpers
+
+```cpp
+template <typename T>
+weight_type<T> infinity()
+```
+
+**Description**: Gets the largest possible (infinite) weight. `weight_type<T>` must always be numeric or this fails to compile.
+
+**Parameters**: *None*
+
+**Returns**: Infinite Weight Value.
+
+**Throws**: *None*
+
+**Time Complexity**: *O(1)* &ndash; Constant Time
+
+----
+
+```cpp
+template <typename T>
+void initializeSingleSource(const WeightedGraph<T>& graph, vertex_type<T> initial_node,
+std::unordered_map<value_type<T>, weight_type<T>>& distances,
+std::unordered_map<value_type<T>, std::optional<value_type<T>>>& predecessors)
+```
+
+**Description**: Sets all distances to infinity except the initial node which is set to 0. Also sets all predecessors to `nullopt`. This indicates that there are no predecessors initially.
+
+**Parameters**:
+- `graph` the graph to initialize the distances
+- `initial_node` the first node in the graph to source the search from
+- `distances` the mapping of vertices to their distances from the source
+- `predecessors` a lookup table telling the predecessor to the current node along the shortest path from the source
+
+**Returns**: *None*
+
+**Throws**: *None*
+
+**Time Complexity**: *O(nm)* &ndash; Linear Time
+- *n* is the number of vertices
+- *m* is the average number of edges in each adjacency list
+
 
 #### Further Reading
 - []()
