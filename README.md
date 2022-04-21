@@ -783,6 +783,8 @@ while len(q) > 0:
         s.append(u)
     for pair in u.adj_list:
         v = pair.first
+        if v in s:
+            continue
         w = pair.second
         r = relax(u, v, w)
         if r:
