@@ -115,7 +115,7 @@ std::istream &operator>>(std::istream &i, WeightedGraph<T> &graph)
     while (std::getline(i, line))
     {
         if (line.empty())
-            continue;
+            break;
         std::istringstream line_stream(line);
         value_type<T> vertex;
         std::string s_vertex;
@@ -137,5 +137,9 @@ std::istream &operator>>(std::istream &i, WeightedGraph<T> &graph)
             graph.push_edge(vertex, edge_end, edge_weight);
         }
     }
+
+    if(i.eof() and i.fail())
+        i.clear(std::ios::eofbit);
+    
     return i;
 }
