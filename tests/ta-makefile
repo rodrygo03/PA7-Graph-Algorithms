@@ -2,7 +2,7 @@
 CXX=g++
 TA_CONFIG=ta_config
 
-SS_ASSIGNEMNT_NAME:=assignment-unordered-map
+SS_ASSIGNEMNT_NAME:=assignment-graph-algorithms
 SS_CLONE_LOCATION:=./sample-submissions
 SS_GIT_REPO:=git@github.tamu.edu:csce221/sample-submissions.git
 SUBMISSION_DIR=submission
