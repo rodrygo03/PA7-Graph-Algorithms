@@ -62,7 +62,7 @@ std::list<value_type<T>> topologicalSort(const WeightedGraph<T>& graph)
 
     // TODO
 
-    return ::list<value_type<T>>();
+    return std::list<value_type<T>>();
 }
 
 template <typename T>

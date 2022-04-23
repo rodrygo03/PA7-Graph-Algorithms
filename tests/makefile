@@ -38,7 +38,7 @@ CFLAGS += -I$(SRC_DIR)
 
 # Add more assignment specific utilities here
 # Although this will break when linking. Only include here if they are universally needed
-ASSIGNMENT_OBJS :=
+ASSIGNMENT_OBJS := sample-graphs.o graph-assert.o
 
 UTILS_OBJS := memhook.o
 UTILS_OBJS += xoshiro256.o
