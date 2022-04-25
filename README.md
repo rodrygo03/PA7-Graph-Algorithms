@@ -778,6 +778,8 @@ q.extend([v for v in graph])
 
 while len(q) > 0:
     u = min(q)
+    if distance[u] == infinity():
+        break
     q.remove(u)
     if u not in s:
         s.append(u)
