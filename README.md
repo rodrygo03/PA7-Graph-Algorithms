@@ -801,7 +801,9 @@ node = destination_node
 while predecessor[node] is not None:
     l.append(node)
 
-l.append(initial_node)
+if len(l) > 0 or initial_node == destination_node:
+    l.append(initial_node)
+
 return l
 ```
 
