@@ -655,6 +655,11 @@ weight_type<T> infinity()
 
 **Time Complexity**: *O(1)* &ndash; Constant Time
 
+**Invocation**:
+```cpp
+infinity<T>();
+```
+
 ----
 
 ```cpp
@@ -744,6 +749,11 @@ if distance[v] > distance[u] + w:
     return True
 
 return False
+```
+
+**Invocation**:
+```cpp
+relax<T>(u, v, w, distances, predecessors);
 ```
 
 #### Dijkstra's Algorithm
