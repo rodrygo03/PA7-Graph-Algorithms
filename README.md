@@ -810,6 +810,7 @@ l = [] # List
 node = destination_node
 while predecessor[node] is not None:
     l = [node] + l # prepend node to l
+    node = predecessor[node]
 
 if len(l) > 0 or initial_node == destination_node:
     l = [initial_node] + l
