@@ -799,10 +799,10 @@ l = [] # List
 
 node = destination_node
 while predecessor[node] is not None:
-    l.append(node)
+    l = [node] + l
 
 if len(l) > 0 or initial_node == destination_node:
-    l.append(initial_node)
+    l = [initial_node] + l
 
 return l
 ```
