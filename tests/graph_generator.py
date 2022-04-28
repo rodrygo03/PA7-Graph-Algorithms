@@ -85,19 +85,19 @@ def save_serialized_graph(G, filename):
 
 
 def serialize_all_shortest_paths(G, file, path_limit=500):
-    for (i, (v1, v2)) in enumerate(product(G, G)):
+    all_paths = tuple(product(G, G))
+    paths = random.sample(all_paths, min(path_limit, len(all_paths)))
 
-        if i >= path_limit:
-            break
+    for (i, (v1, v2)) in enumerate(paths):
 
         file.write(f'{v1} {v2} : ')
 
         try:
-            paths = list(nx.all_shortest_paths(G, source=v1, target=v2, weight='weight'))
+            shortest_paths = list(nx.all_shortest_paths(G, source=v1, target=v2, weight='weight'))
         except nx.exception.NetworkXNoPath:
-            paths = []
+            shortest_paths = []
         
-        for i, p in enumerate(paths):
+        for i, p in enumerate(shortest_paths):
             file.write(f'{" ".join(map(str, p))}')
 
             if i != len(paths) - 1:
@@ -105,11 +105,11 @@ def serialize_all_shortest_paths(G, file, path_limit=500):
         
         file.write('\n')
 
-def save_all_shortest_paths(G, filename):
+def save_all_shortest_paths(G, filename, *args, **kargs):
     with open(filename, 'w') as file:
-        serialize_all_shortest_paths(G, file)
+        serialize_all_shortest_paths(G, file, *args, **kargs)
 
-def archive_graph(G, alias, base_path = ARCHIVE_PATH):
+def archive_graph(G, alias, base_path = ARCHIVE_PATH, path_limit=500):
 
     L = G.copy()
 
@@ -133,9 +133,9 @@ def archive_graph(G, alias, base_path = ARCHIVE_PATH):
 
     save_serialized_graph(G, dir / f'{alias}.dat')
 
-    save_all_shortest_paths(G, dir / f'{alias}_shortest_paths.dat')
+    save_all_shortest_paths(G, dir / f'{alias}_shortest_paths.dat', path_limit=path_limit)
 
-def generate_from_paramter_grid(alias, gen_fn, params):    
+def generate_from_paramter_grid(alias, gen_fn, params, path_limit=500):    
     
     param_tuples = [list(product((l, ), v)) for l, v in params.items()]
 
@@ -147,7 +147,7 @@ def generate_from_paramter_grid(alias, gen_fn, params):
 
         instance = alias + '-' + '_'.join(map(lambda kv : str(kv[0]) + '=' + str(kv[1]), cell))
 
-        archive_graph(G, instance)
+        archive_graph(G, instance,path_limit=path_limit)
 
 
 def complete_dropout_graph(size, dropout_p, weight_mean, weight_p):
@@ -205,7 +205,8 @@ if __name__ == '__main__':
             'dropout_p': [0.1, 0.25],
             'weight_mean': [10],
             'weight_p': [0.25, 0.5]
-        }
+        },
+        path_limit=10
     )
 
     generate_from_paramter_grid(

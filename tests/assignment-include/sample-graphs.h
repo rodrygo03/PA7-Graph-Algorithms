@@ -84,13 +84,13 @@ using shortest_path_pairs = std::vector<struct shortest_path<T>>;
 
 template<typename T>
 shortest_path_pairs<T> read_paths(fs::path const & graph_path) {
-    fs::path shortest_path = graph_path;
-    shortest_path /= graph_path.filename();
-    shortest_path += "_shortest_paths.dat";
+    fs::path shortest_pathfile = graph_path;
+    shortest_pathfile /= graph_path.filename();
+    shortest_pathfile += "_shortest_paths.dat";
 
-    std::ifstream fs { shortest_path };
+    std::ifstream fs { shortest_pathfile };
     shortest_path_pairs<T> paths;
-    struct shortest_path<T> path;
+    shortest_path<T> path { };
     while(fs >> path)
         paths.push_back(std::move(path));
     
