@@ -80,7 +80,7 @@ std::ostream & _assert_top_sort_order(std::ostream & o, std::string const & type
 
                     o << "Vertex: " << adj_vert;
                     o << " was found in adjacency list of vertex " << vertex << ". ";
-                    o << adj_vert << " should appear before " << vertex << " in the topological ordering." << std::endl << std::endl;
+                    o << vertex << " should appear before " << adj_vert << " in the topological ordering." << std::endl << std::endl;
                     
                     o << "Returned topological sort ordering:" << std::endl;
                     print_path<uint>(o, sorted_graph);
