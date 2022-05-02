@@ -802,9 +802,6 @@ while len(q) > 0:
         if r:
             updateHeap(q)
 
-if predecessor[destination_node] is None:
-    return []
-
 l = [] # List
 
 node = destination_node
