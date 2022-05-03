@@ -874,3 +874,5 @@ Submit the following file **and no other files** to Gradescope:
 - [ ] [`dijkstras-helpers.h`](src/dijkstras-helpers.h)
 - [ ] [`top-sort-helpers.h`](src/top-sort-helpers.h)
 - [ ] [`graph-algorithms.h`](src/graph-algorithms.h)
+- [ ] ['graph-types.h'](src/graph-types.h)
+- [ ] ['weighted-graphs.hpp'](src/weighted-graphs.hpp)
