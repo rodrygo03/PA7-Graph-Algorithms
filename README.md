@@ -32,7 +32,7 @@ o.value() // fetch the value from o, fails if no value
 
 Download this code by running the following command in the directory of your choice:
 ```sh
-git clone https://github.tamu.edu/csce221/assignment-graph-algorithms.git && cd assignment-graph-algorithms
+git clone https://github.tamu.edu/csce221/assignment-graph-algorithms-spring2022.git && cd assignment-graph-algorithms-spring2022
 ```
 [OPTIONAL] Then set up CMake (if your editor does not do this for you):
 ```sh
