@@ -831,7 +831,7 @@ Graphs are not commonly used directly by programmers to solve problems but prope
 
 To run the tests, you need to rename [`main.cpp`](./src/main.cpp) or you need to rename the `int main` function within that file.
 
-Execute the following commands from the `assignment-unordered-map` folder to accomplish what you need:
+Execute the following commands from the `leyk-csce221-assignment-graph-algorithms` folder to accomplish what you need:
 
 **Build all of the tests**
 ```sh
