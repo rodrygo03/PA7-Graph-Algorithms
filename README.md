@@ -818,7 +818,6 @@ return l
 - [Topological sorting - GeeksforGeeks](https://www.geeksforgeeks.org/topological-sorting/)
 
 #### Dijkstra's Algorithm
-- [Dr. Leyk's Slides](https://canvas.tamu.edu/courses/136654/files/35930572/preview)
 - [Dijkstra's algorithm - Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 - [Dijkstra's algorithm - GeeksforGeeks](https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)
 
