@@ -13,7 +13,7 @@ Pseudocode for these functions is provided below. (Search for `PSEUDOCODE` using
 This is intended to be a fairly easy Programming Assignment to end the semester, but there are a few new concepts which we will describe below.
 
 ### `std::unordered_set`
-This is similar to a `std::unordered_map`, but where a map maintains key-value pairs, the set maintains only keys. Its role is to add and remove element quickly and to quickly determine whether an element is present in the set.
+This is similar to a `std::unordered_map`, but where a map maintains key-value pairs, the set maintains only keys. Its role is to add and remove elements quickly and to quickly determine whether an element is present in the set.
 
 It is used in Dijkstra's algorithm to manage the set of visited nodes `s`.
 
