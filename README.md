@@ -54,9 +54,9 @@ The assignment provides you with a working `WeightedGraph` data structure, which
 | `value_type` | `T` | The values stored in the vertices. Commonly used in the functions you'll write. |
 | `weight_type` | `int` | The type for edge weights. This is `int` for all graphs by default. The only requirement is that it is numeric. |
 | `vertex_type` | `const value_type` | The type for vertices. It's a `const` form of `value_type`. Because of it being `const`, you can't use it for most of the functions you write. Use `value_type` instead. |
-| `edge_type` | `std::pair<vertex_type, weight_type>` | A type for edges. The edges are really key value pairs within the adjacency list map, and I never used this type alias but it's here if you want it. |
+| `edge_type` | `std::pair<vertex_type, weight_type>` | A type for edges. The edges are really key value pairs within the adjacency list map. It is not necessary, but you may use it if you want. |
 | `adjacency_list` | `std::unordered_map<value_type, weight_type>` | The type of the adjacency list for a given source vertex. We use a `map` to associate destination vertices (`value_type`) to the weight (`weight_type`) of the edge connecting from the source. |
-| `container_type` | `std::unordered_map<value_type, adjacency_list>` | The type of the container that manages the vertices (`value_type`) and their associated ajacency lists (`adjacency_list`). We use a `map` to handle the association. |
+| `container_type` | `std::unordered_map<value_type, adjacency_list>` | The type of the container that manages the vertices (`value_type`) and their associated adjacency lists (`adjacency_list`). We use a `map` to handle the association. |
 | `size_type` | `typename container_type::size_type` | We steal `size_type` from the `container`. It is likely `std::size_t` in most cases. |
 | `iterator` | `typename container_type::iterator` | Our main iterator which allows us to check the vertices and/or adjacency lists is the iterator for the `container`. |
 | `const_iterator` | `typename container_type::const_iterator` | We also get the `const_iterator` from the container. |
