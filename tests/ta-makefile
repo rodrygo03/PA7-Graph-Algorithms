@@ -31,7 +31,7 @@ $(TA_CONFIG):
 .PHONY: $(TA_CONFIG)
 
 create-dir: $(TA_CONFIG) $(SUBMISSION_DIR)
-	@echo "SRC_DIR=$(SUBMISSION_DIR)" >> "$(TA_CONFIG)""
+	@echo "RTEST_SRC_DIR=$(SUBMISSION_DIR)" >> "$(TA_CONFIG)""
 
 clean:
 	$(RM) $(TA_CONFIG)
