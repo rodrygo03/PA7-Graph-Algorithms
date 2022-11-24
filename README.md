@@ -13,7 +13,7 @@ Pseudocode for these functions is provided below. (Search for `PSEUDOCODE` using
 This is intended to be a fairly easy Programming Assignment to end the semester, but there are a few new concepts which we will describe below.
 
 ### `std::unordered_set`
-This is similar to a `std::unordered_map`, but where a map maintains key-value pairs, the set maintains only keys. Its role is to add and remove element quickly and to quickly determine whether an element is present in the set.
+This is similar to a `std::unordered_map`, but where a map maintains key-value pairs, the set maintains only keys. Its role is to add and remove elements quickly and to quickly determine whether an element is present in the set.
 
 It is used in Dijkstra's algorithm to manage the set of visited nodes `s`.
 
@@ -32,12 +32,9 @@ o.value() // fetch the value from o, fails if no value
 
 Download this code by running the following command in the directory of your choice:
 ```sh
-git clone https://github.tamu.edu/csce221/assignment-graph-algorithms.git && cd assignment-graph-algorithms
+git clone git@github.com:tamu-edu-students/leyk-csce221-assignment-graph-algorithms.git && cd leyk-csce221-assignment-graph-algorithms
 ```
-[OPTIONAL] Then set up CMake (if your editor does not do this for you):
-```sh
-cmake -S . -B build
-```
+
 Open the code in your editor of choice. For instance, if you use VS Code:
 ```sh
 code .
@@ -57,9 +54,9 @@ The assignment provides you with a working `WeightedGraph` data structure, which
 | `value_type` | `T` | The values stored in the vertices. Commonly used in the functions you'll write. |
 | `weight_type` | `int` | The type for edge weights. This is `int` for all graphs by default. The only requirement is that it is numeric. |
 | `vertex_type` | `const value_type` | The type for vertices. It's a `const` form of `value_type`. Because of it being `const`, you can't use it for most of the functions you write. Use `value_type` instead. |
-| `edge_type` | `std::pair<vertex_type, weight_type>` | A type for edges. The edges are really key value pairs within the adjacency list map, and I never used this type alias but it's here if you want it. |
+| `edge_type` | `std::pair<vertex_type, weight_type>` | A type for edges. The edges are really key value pairs within the adjacency list map. It is not necessary, but you may use it if you want. |
 | `adjacency_list` | `std::unordered_map<value_type, weight_type>` | The type of the adjacency list for a given source vertex. We use a `map` to associate destination vertices (`value_type`) to the weight (`weight_type`) of the edge connecting from the source. |
-| `container_type` | `std::unordered_map<value_type, adjacency_list>` | The type of the container that manages the vertices (`value_type`) and their associated ajacency lists (`adjacency_list`). We use a `map` to handle the association. |
+| `container_type` | `std::unordered_map<value_type, adjacency_list>` | The type of the container that manages the vertices (`value_type`) and their associated adjacency lists (`adjacency_list`). We use a `map` to handle the association. |
 | `size_type` | `typename container_type::size_type` | We steal `size_type` from the `container`. It is likely `std::size_t` in most cases. |
 | `iterator` | `typename container_type::iterator` | Our main iterator which allows us to check the vertices and/or adjacency lists is the iterator for the `container`. |
 | `const_iterator` | `typename container_type::const_iterator` | We also get the `const_iterator` from the container. |
@@ -821,7 +818,6 @@ return l
 - [Topological sorting - GeeksforGeeks](https://www.geeksforgeeks.org/topological-sorting/)
 
 #### Dijkstra's Algorithm
-- [Dr. Leyk's Slides](https://canvas.tamu.edu/courses/136654/files/35930572/preview)
 - [Dijkstra's algorithm - Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 - [Dijkstra's algorithm - GeeksforGeeks](https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)
 
@@ -835,7 +831,7 @@ Graphs are not commonly used directly by programmers to solve problems but prope
 
 To run the tests, you need to rename [`main.cpp`](./src/main.cpp) or you need to rename the `int main` function within that file.
 
-Execute the following commands from the `assignment-unordered-map` folder to accomplish what you need:
+Execute the following commands from the `leyk-csce221-assignment-graph-algorithms` folder to accomplish what you need:
 
 **Build all of the tests**
 ```sh
