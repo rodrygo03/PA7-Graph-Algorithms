@@ -3,7 +3,7 @@
         {
             "name":"dijkstra-complete_graph",
             "cmds": [
-                "make -C tests SRC_DIR=../../submission -j12 run/dijkstra-complete_graph"
+                "make -C tests RTEST_SRC_DIR=../../submission -j12 run/dijkstra-complete_graph"
             ],
             "points": 13,
             "time_limit": 5000,
@@ -12,7 +12,7 @@
         {
             "name":"dijkstra-complete_with_dropout",
             "cmds": [
-                "make -C tests SRC_DIR=../../submission -j12 run/dijkstra-complete_with_dropout"
+                "make -C tests RTEST_SRC_DIR=../../submission -j12 run/dijkstra-complete_with_dropout"
             ],
             "points": 13,
             "time_limit": 5000,
@@ -21,7 +21,7 @@
         {
             "name":"dijkstra-directed_tree",
             "cmds": [
-                "make -C tests SRC_DIR=../../submission -j12 run/dijkstra-directed_tree"
+                "make -C tests RTEST_SRC_DIR=../../submission -j12 run/dijkstra-directed_tree"
             ],
             "points": 13,
             "time_limit": 45000,
@@ -30,7 +30,7 @@
         {
             "name":"dijkstra-gnp_dag",
             "cmds": [
-                "make -C tests SRC_DIR=../../submission -j12 run/dijkstra-gnp_dag"
+                "make -C tests RTEST_SRC_DIR=../../submission -j12 run/dijkstra-gnp_dag"
             ],
             "points": 13,
             "time_limit": 45000,
@@ -39,7 +39,7 @@
         {
             "name":"dijkstra-internet",
             "cmds": [
-                "make -C tests SRC_DIR=../../submission -j12 run/dijkstra-internet"
+                "make -C tests RTEST_SRC_DIR=../../submission -j12 run/dijkstra-internet"
             ],
             "points": 13,
             "time_limit": 45000,
@@ -48,7 +48,7 @@
         {
             "name":"topological_sort",
             "cmds": [
-                "make -C tests SRC_DIR=../../submission -j12 run/topological_sort"
+                "make -C tests RTEST_SRC_DIR=../../submission -j12 run/topological_sort"
             ],
             "points": 35,
             "time_limit": 5000,
