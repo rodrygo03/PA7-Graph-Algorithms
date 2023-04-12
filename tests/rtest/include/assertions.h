@@ -45,6 +45,7 @@ bool tdbg_empty();
     UTEST_AUTO(x) xEval = (x);                                                 \
     UTEST_AUTO(y) yEval = (y);                                                 \
     if (!((xEval)cond(yEval))) {                                               \
+      UTEST_PRINTF("%s:%u: Failure\n", __FILE__, __LINE__);                    \
       UTEST_PRINTF("  Expected : (");                                          \
       UTEST_PRINTF(#x ") " #cond " (" #y);                                     \
       UTEST_PRINTF(")\n");                                                     \
@@ -87,7 +88,7 @@ bool tdbg_empty();
     if (!(xEval)) {                                                            \
       UTEST_PRINTF("%s:%u: Failure\n", __FILE__, __LINE__);                    \
       UTEST_PRINTF("  Expected : (");                                          \
-      UTEST_PRINTF(#x ") == true");                                            \
+      UTEST_PRINTF(#x ") is true");                                            \
       UTEST_PRINTF(")\n");                                                     \
       UTEST_PRINTF("    Actual : %s\n", (xEval) ? "true" : "false");           \
       tdbg_report_failure(__FILE__, __LINE__);                                 \
@@ -113,7 +114,7 @@ bool tdbg_empty();
     if (xEval) {                                                               \
       UTEST_PRINTF("%s:%u: Failure\n", __FILE__, __LINE__);                    \
       UTEST_PRINTF("  Expected : (");                                          \
-      UTEST_PRINTF(#x ") == false");                                           \
+      UTEST_PRINTF(#x ") is false");                                           \
       UTEST_PRINTF(")\n");                                                     \
       UTEST_PRINTF("    Actual : %s\n", (xEval) ? "true" : "false");           \
       tdbg_report_failure(__FILE__, __LINE__);                                 \
