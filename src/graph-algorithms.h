@@ -62,7 +62,36 @@ std::list<value_type<T>> topologicalSort(const WeightedGraph<T>& graph)
 
     // TODO
 
-    return std::list<value_type<T>>();
+    std::queue<value_type<T>> q;
+    std::list<value_type<T>> l;
+    computeIndegrees(graph, indegrees);
+
+    using const_itr = typename WeightedGraph<T>::const_iterator;
+    for (const_itr i=graph.begin(); i!=graph.end(); i++)    {
+        if (indegrees[i->first] == 0)   {
+            q.emplace(i->first);
+       }
+    }
+
+    while (q.size() > 0)    {
+        T v = q.front();
+        q.pop();
+        l.push_back(v);
+
+        for (auto [vertex_type, weight_type]: graph.at(v))  {
+            indegrees[vertex_type] -= 1;
+            if (indegrees[vertex_type]==0)  {
+                q.emplace(vertex_type);
+            }
+        }
+    }
+
+    if (l.size() != graph.size())   {
+        l.clear();
+    }
+
+    return l;
+
 }
 
 template <typename T>
