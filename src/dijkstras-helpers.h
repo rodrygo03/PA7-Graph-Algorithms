@@ -16,10 +16,12 @@ std::unordered_map<value_type<T>, weight_type<T>>& distances,
 std::unordered_map<value_type<T>, std::optional<value_type<T>>>& predecessors)
 {
     // TODO relax the distance to v from u with weight w by changing the distances and predecessors maps as necessary
-    
-
-
-
+    if (distances[v] > distances[u] + w)    {
+        distances[v] = distances[u] + w;
+        predecessors[v] = u;
+        return true;
+    }
+    return false;
 }
 
 template <typename T>

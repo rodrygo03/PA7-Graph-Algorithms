@@ -39,10 +39,52 @@ std::list<value_type<T>> dijkstrasAlgorithm(const WeightedGraph<T>& graph, verte
     std::priority_queue<value_type<T>, std::vector<value_type<T>>, DijkstraComparator<T>> q(DijkstraComparator<T>{distances});
 
     // TODO implement Dijkstra's Algorithm
+    
+    initializeSingleSource(graph, initial_node, distances, predecessors);    
+    using const_itr = typename WeightedGraph<T>::const_iterator;
+    for (const_itr i=graph.begin(); i!=graph.end(); i++)    {
+        q.emplace(i->first);
+    }
+
+    while (q.size() > 0)    {
+        T u = q.top();
+        if (distances[u] == infinity<T>()) {
+            break;
+        }
+        q.pop();
+        if (s.find(u) == s.end()) {
+            s.insert(u);
+        }
+
+        adjacency_list<T> k = graph.at(u);
+        for (edge_iterator<T> i=k.begin(); i!=k.end(); i++) {
+            T v = i->first;
+            if (s.find(v) != s.end()) {
+                continue;
+            }
+            T w = i->second;
+            bool r = relax<T>(u, v, w, distances, predecessors);
+            if (r)  {
+                updateHeap(q, distances);
+            }
+        }
+
+    }
 
     // TODO create list by walking backwards through predecessors from the end
 
-    return std::list<value_type<T>>();
+    std::list<value_type<T>> l;
+    auto node = destination_node;
+    while (predecessors[node] != std::nullopt)    {
+        l.push_front(node);
+        node = predecessors[node].value();
+    }
+    if (l.size() > 0 || initial_node == destination_node)   {
+        l.push_front(initial_node);
+    }
+
+    // return std::list<value_type<T>>();
+    return l;
 }
 
 #include "top-sort-helpers.h"
